@@ -40,12 +40,12 @@ module StyleKeeper
         violations = l.check(path)
         violations.sort_by(&:line).each do |violation|
           position = file.position(violation.line)
-          create_comment(file.filename, position, violation.message) unless position.nil?
+          create_pull_request_comment(violation.message, file.filename, position) unless position.nil?
         end
       end
     end
 
-    def create_comment(path, position, message)
+    def create_pull_request_comment(message, path, position)
       return if pull_request_comments.any? { |comment| comment.path == path && comment.position == position && comment.body.strip == message.strip }
       puts "#{path}(#{position}): #{message}"
       pull_request.create_pull_request_comment(message, path, position)
