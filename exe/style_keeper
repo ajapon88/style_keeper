@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require 'style_keeper'
+require 'optparse'
+
+options = {}
+opt = OptionParser.new do |opt|
+  opt.on('-r VAL', '--repository=VAL', 'Github repository') { |v| options[:repository] = v }
+  opt.on('-n VAL', '--pull-request-number=VAL', 'Pull Request Number') { |v| options[:pull_request_number] = v }
+  opt.on('-s VAL', '--sha=VAL', 'Pull Request Commit sha') { |v| options[:sha] = v }
+  opt.on('-t VAL', '--token=VAL', 'Github access token') { |v| options[:token] = v }
+end
+opt.parse!(ARGV)
+style_keeper = StyleKeeper::StyleKeeper.new(options[:repository], options[:pull_request_number], options[:sha], options[:token])
+style_keeper.hound

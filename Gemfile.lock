@@ -1,0 +1,57 @@
+GIT
+  remote: https://github.com/ajapon88/ruby-style_cop.git
+  revision: 87ef02afe170f675c1bfa2cfde6db23add4a4279
+  specs:
+    style_cop (0.1.0)
+      highline
+
+GIT
+  remote: https://github.com/ajapon88/style_keeper-linters.git
+  revision: f50938c369748824579e461f7a454cb5cb6f416b
+  specs:
+    style_keeper-linters (0.1.0)
+
+GIT
+  remote: https://github.com/ajapon88/style_keeper-pull_request.git
+  revision: 8590d17524a130fed58e9aeb36020dd1fef9bf78
+  specs:
+    style_keeper-pull_request (0.1.0)
+      git_diff_parser
+      octokit
+
+PATH
+  remote: .
+  specs:
+    style_keeper (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    faraday (0.14.0)
+      multipart-post (>= 1.2, < 3)
+    git_diff_parser (3.1.0)
+    highline (1.7.10)
+    multipart-post (2.0.0)
+    octokit (4.8.0)
+      sawyer (~> 0.8.0, >= 0.5.3)
+    public_suffix (3.0.2)
+    rake (10.5.0)
+    sawyer (0.8.1)
+      addressable (>= 2.3.5, < 2.6)
+      faraday (~> 0.8, < 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.16)
+  rake (~> 10.0)
+  style_cop!
+  style_keeper!
+  style_keeper-linters!
+  style_keeper-pull_request!
+
+BUNDLED WITH
+   1.16.1
