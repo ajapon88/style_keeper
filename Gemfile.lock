@@ -5,24 +5,12 @@ GIT
     style_cop (0.1.0)
       highline
 
-GIT
-  remote: https://github.com/ajapon88/style_keeper-linters.git
-  revision: f50938c369748824579e461f7a454cb5cb6f416b
-  specs:
-    style_keeper-linters (0.1.0)
-
-GIT
-  remote: https://github.com/ajapon88/style_keeper-pull_request.git
-  revision: 8590d17524a130fed58e9aeb36020dd1fef9bf78
-  specs:
-    style_keeper-pull_request (0.1.0)
-      git_diff_parser
-      octokit
-
 PATH
   remote: .
   specs:
     style_keeper (0.1.0)
+      git_diff_parser
+      octokit
 
 GEM
   remote: https://rubygems.org/
@@ -50,8 +38,6 @@ DEPENDENCIES
   rake (~> 10.0)
   style_cop!
   style_keeper!
-  style_keeper-linters!
-  style_keeper-pull_request!
 
 BUNDLED WITH
    1.16.1

@@ -1,6 +1,11 @@
 require 'style_keeper/version'
-require 'style_keeper/pull_request'
-require 'style_keeper/linters'
+require 'style_keeper/linters/violation'
+require 'style_keeper/linters/style_cop'
+require 'style_keeper/pull_request/change_file'
+require 'style_keeper/pull_request/contents'
+require 'style_keeper/pull_request/github_api'
+require 'style_keeper/pull_request/pull_request'
+
 require 'fileutils'
 require 'style_cop'
 
