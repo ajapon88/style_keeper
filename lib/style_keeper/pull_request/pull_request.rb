@@ -1,3 +1,7 @@
+require 'style_keeper/pull_request/change_file'
+require 'style_keeper/pull_request/contents'
+require 'style_keeper/pull_request/github_api'
+
 module StyleKeeper
   # PullRequest accessor
   class PullRequest
