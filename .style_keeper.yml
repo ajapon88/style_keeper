@@ -1,2 +1,2 @@
 csharp:
-  config_file: Settings.StyleCop
+  config_file: repo://Settings.StyleCop

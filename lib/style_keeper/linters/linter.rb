@@ -2,8 +2,12 @@
 module StyleKeeper
   module Linters
     class Linter
-      def config_file
-        nil
+      attr_reader :config
+      attr_accessor :config_file
+
+      def initialize(config)
+        @config = config
+        @config_file = @config['config_file'] unless config.nil?
       end
 
       def lint(_file)

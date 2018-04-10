@@ -12,7 +12,7 @@ module StyleKeeper
     end
 
     def linters
-      @linters ||= { /^*\.cs$/ => Linters::StyleCop.new(config['csharp']) }
+      @_linters ||= { /^*\.cs$/ => ::StyleKeeper::Linters::StyleCop.new(config['csharp']) }
     end
 
     def linter(filename)
