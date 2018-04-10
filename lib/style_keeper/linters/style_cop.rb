@@ -4,13 +4,11 @@ module StyleKeeper
   module Linters
     class StyleCop
       attr_reader :config
+      attr_accessor :config_file
 
       def initialize(config)
         @config = config
-      end
-
-      def config_file
-        config['config_file']
+        @config_file = @config['config_file'] unless config.nil?
       end
 
       def lint(file)

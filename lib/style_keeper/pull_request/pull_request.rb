@@ -64,9 +64,10 @@ module StyleKeeper
       @contents["#{path}:#{head.sha}"] = Contents.new(contents.name, contents.sha, contents.path, contents.content)
     end
 
-    def contents_file_with_cache(filename, file_sha)
+    def contents_file_with_cache(filename, file_sha = nil)
       cache_dir = '.cache'
       contents = contents(filename)
+      file_sha = head.sha if file_sha.nil?
       path = File.join(cache_dir, file_sha, filename)
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'w') do |f|
