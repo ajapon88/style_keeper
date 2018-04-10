@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'StyleKeeper'
   spec.description   = 'StyleKeeper'
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/ajapon88/style_keeper'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
