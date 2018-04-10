@@ -64,12 +64,29 @@ module StyleKeeper
       @contents["#{path}:#{head.sha}"] = Contents.new(contents.name, contents.sha, contents.path, contents.content)
     end
 
+    def contents_file_with_cache(filename, file_sha)
+      cache_dir = '.cache'
+      contents = contents(filename)
+      path = File.join(cache_dir, file_sha, filename)
+      FileUtils.mkdir_p(File.dirname(path))
+      File.open(path, 'w') do |f|
+        f.write(contents.contents_file)
+      end
+      path
+    end
+
     def pull_request_comments
       @_pull_request_comments ||= github_api.pull_request_comments(repo, number)
     end
 
     def create_pull_request_comment(body, path, position)
       github_api.create_pull_request_comment(repo, number, body, sha, path, position)
+    end
+
+    def create_pull_request_comment_once(message, path, position)
+      return if pull_request_comments.any? { |comment| comment.path == path && comment.position == position && comment.body.strip == message.strip }
+      puts "#{path}(#{position}): #{message}"
+      create_pull_request_comment(message, path, position)
     end
 
     private
