@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ajapon88/ruby-style_cop.git
-  revision: 87ef02afe170f675c1bfa2cfde6db23add4a4279
+  revision: e29fb431c3464c27af5694f55593d9c59f51ae06
   specs:
     style_cop (0.1.0)
       highline
