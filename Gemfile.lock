@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/ajapon88/ruby-style_cop.git
+  remote: git://github.com/ajapon88/ruby-style_cop.git
   revision: e29fb431c3464c27af5694f55593d9c59f51ae06
   specs:
     style_cop (0.1.0)
@@ -11,6 +11,7 @@ PATH
     style_keeper (0.1.0)
       git_diff_parser
       octokit
+      style_cop
       thor
 
 GEM
