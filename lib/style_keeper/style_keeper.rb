@@ -22,7 +22,7 @@ module StyleKeeper
     end
 
     def hound(repository, pull_request_number, sha = nil)
-      pull_request = PullRequest.new(github_api_token, repository, pull_request_number, sha)
+      pull_request = PullRequest::PullRequest.new(github_api_token, repository, pull_request_number, sha)
       config_files = {}
       pull_request.changed_files.each do |file|
         l = linter(file.filename)
