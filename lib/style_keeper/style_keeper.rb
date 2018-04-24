@@ -12,12 +12,11 @@ module StyleKeeper
     end
 
     def linters
-      @_linters ||= { /^*\.cs$/ => ::StyleKeeper::Linters::StyleCop.new(config['csharp']) }
+      @_linters ||= [::StyleKeeper::Linters::StyleCop.new(config['csharp'])]
     end
 
     def linter(filename)
-      linters.select { |k, _| filename.match(k) }
-             .collect { |_, v| v }
+      linters.select { |linter| linter.include?(filename) && !linter.exclude?(filename) }
              .first
     end
 
@@ -27,6 +26,7 @@ module StyleKeeper
       pull_request.changed_files.each do |file|
         l = linter(file.filename)
         next if l.nil?
+        puts "#{l.class}: #{file.filename}"
         repo_config(pull_request, l)
         path = pull_request.contents_file_with_cache(file.filename, file.sha)
         violations = l.lint(path)

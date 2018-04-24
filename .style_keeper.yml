@@ -1,2 +1,5 @@
 csharp:
   config_file: repo://Settings.StyleCop
+  include:
+    - "*.cs"
+  exclude:

@@ -86,8 +86,8 @@ module StyleKeeper
       end
 
       def create_pull_request_comment_once(message, path, position)
-        return if pull_request_comments.any? { |comment| comment.path == path && comment.position == position && comment.body.strip == message.strip }
         puts "#{path}(#{position}): #{message}"
+        return if pull_request_comments.any? { |comment| comment.path == path && comment.position == position && comment.body.strip == message.strip }
         create_pull_request_comment(message, path, position)
       end
 
