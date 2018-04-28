@@ -2,8 +2,9 @@ module StyleKeeper
   module PullRequest
     class Contents
       attr_reader :name, :sha, :path, :content
-      def initialize(name, _sha, path, content)
+      def initialize(name, sha, path, content)
         @name = name
+        @sha = sha
         @path = path
         @content = content
       end

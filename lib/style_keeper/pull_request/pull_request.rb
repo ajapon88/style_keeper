@@ -1,6 +1,8 @@
 require 'style_keeper/pull_request/change_file'
 require 'style_keeper/pull_request/contents'
 require 'style_keeper/pull_request/github_api'
+require 'style_keeper/pull_request/contents_cache'
+require 'tmpdir'
 
 module StyleKeeper
   module PullRequest
@@ -18,7 +20,7 @@ module StyleKeeper
           raise 'invalid sha' unless contains_sha?(sha)
           @sha = sha
         end
-        @contents = {}
+        ContentsCache.clean_contents_old_cache
       end
 
       def base
@@ -59,17 +61,21 @@ module StyleKeeper
                             .map { |file| ChangeFile.new(file.filename, file.sha, file.patch, self) }
       end
 
-      def contents(path)
-        return @contents["#{path}:#{head.sha}"] if @contents["#{path}:#{head.sha}"]
-        contents = github_api.contents(repo, path, head.sha)
-        @contents["#{path}:#{head.sha}"] = Contents.new(contents.name, contents.sha, contents.path, contents.content)
+      def contents(path, sha)
+        sha = head.sha if sha.nil?
+        cache = ContentsCache.find_contents_cache(repo, path, sha)
+        puts "hit chached path:#{path}, sha=#{sha}, update_at:#{cache.updated_at}" unless cache.nil?
+        if cache.nil?
+          contents = github_api.contents(repo, path, sha)
+          cache = ContentsCache.create_contents_cache(repo, contents.name, path, sha, contents.content)
+        end
+        cache.nil? ? nil : Contents.new(cache.name, cache.sha, cache.path, cache.content)
       end
 
-      def contents_file_with_cache(filename, file_sha = nil)
-        cache_dir = '.cache'
-        contents = contents(filename)
-        file_sha = head.sha if file_sha.nil?
-        path = File.join(cache_dir, file_sha, filename)
+      def contents_file(path, file_sha = nil)
+        cache_dir = File.join(Dir.tmpdir, 'style_keeper')
+        contents = contents(path, file_sha)
+        path = File.join(cache_dir, contents.sha, contents.path)
         FileUtils.mkdir_p(File.dirname(path))
         File.open(path, 'w') do |f|
           f.write(contents.contents_file)

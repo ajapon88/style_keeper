@@ -30,8 +30,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'activerecord'
   spec.add_dependency 'git_diff_parser'
   spec.add_dependency 'octokit'
+  spec.add_dependency 'sqlite3'
   spec.add_dependency 'style_cop'
   spec.add_dependency 'thor'
 
