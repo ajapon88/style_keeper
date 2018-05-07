@@ -15,11 +15,11 @@ module StyleKeeper
       end
 
       def include?(file)
-        fnmatch?(config['includes'], file)
+        fnmatch?(config['include'], file)
       end
 
       def exclude?(file)
-        fnmatch?(config['excludes'], file)
+        fnmatch?(config['exclude'], file)
       end
 
       def fnmatch?(patterns, file)

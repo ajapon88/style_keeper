@@ -2,9 +2,9 @@ cache:
   lifetime: 86400
 csharp:
   config_file: repo://Settings.StyleCop
-  includes:
+  include:
     - "*.cs"
-  excludes:
+  exclude:
   defines:
     - DEBUG
     - RELEASE
